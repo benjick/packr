@@ -10,9 +10,10 @@ import { org, packages } from "../../packages";
 import { generateIndexFile, generateReadmeFile } from "./files";
 
 const execPromise = promisify(exec);
+const DRY_RUN = process.env.DRY_RUN === "true";
 
 async function main() {
-  if (!process.env.NPM_TOKEN) {
+  if (!DRY_RUN && !process.env.NPM_TOKEN) {
     throw new Error("Missing NPM_TOKEN");
   }
   for (const [id, config] of Object.entries(packages)) {
@@ -71,7 +72,7 @@ async function main() {
     // 5. Build package
     await run("npm run build", targetDir);
 
-    if (process.env.DRY_RUN === "true") {
+    if (DRY_RUN) {
       console.log("🔔 Skipping publish...");
       continue;
     }
@@ -93,10 +94,8 @@ async function run(cmd: string, cwd: string) {
     console.error(stderr);
     return stderr;
   }
-  if (process.env.DRY_RUN === "true") {
-    // write to file
+  if (DRY_RUN) {
     const output = path.resolve(cwd, "output.txt");
-    // append to file if it exists
     fs.appendFileSync(output, stdout);
   }
   return stdout;

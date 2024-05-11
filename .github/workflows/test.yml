@@ -1,0 +1,21 @@
+name: Test pull request
+
+on:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 8
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm"
+      - name: pnpm i
+        run: pnpm i
+      - name: Publish packages
+        run: pnpm run test
