@@ -16,4 +16,8 @@ export const packages: Record<string, Package> = {
     openapi:
       "https://raw.githubusercontent.com/Sonarr/Sonarr/develop/src/Sonarr.Api.V3/openapi.json",
   },
+  lidarr: {
+    openapi:
+      "https://raw.githubusercontent.com/lidarr/Lidarr/develop/src/Lidarr.Api.V1/openapi.json",
+  },
 };

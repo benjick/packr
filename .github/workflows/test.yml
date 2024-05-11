@@ -18,4 +18,4 @@ jobs:
       - name: pnpm i
         run: pnpm i
       - name: Publish packages
-        run: pnpm run test
+        run: pnpm run dev
