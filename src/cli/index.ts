@@ -32,6 +32,10 @@ async function main() {
     const targetDir = path.resolve(__dirname, `../../packages/${id}`);
     const templateDir = path.resolve(__dirname, `../template`);
 
+    // 1. Remove existing directory
+    fs.rmSync(targetDir, { recursive: true, force: true });
+
+    // 2. Create new package
     const packageJsonPath = path.resolve(templateDir, `package.json`);
     const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, "utf-8"));
     packageJson.name = packageName;
@@ -39,10 +43,6 @@ async function main() {
     packageJson.keywords = [id, "openapi", "api", "client"];
     packageJson.description = `Generated client for ${id} API`;
 
-    // 1. Remove existing directory
-    fs.rmSync(targetDir, { recursive: true, force: true });
-
-    // 2. Create new package
     fs.mkdirSync(path.resolve(targetDir, "src"), { recursive: true });
     fs.writeFileSync(path.resolve(targetDir, "src/index.ts"), indexFile);
     fs.writeFileSync(path.resolve(targetDir, "README.md"), readme);
@@ -107,9 +107,14 @@ async function getLatestPublishedVersion(packageName: string) {
   if (res.status === 404) {
     return "0";
   }
+  if (!res.ok) {
+    return "0";
+  }
   const data = await res.json();
-  const latest = data["dist-tags"].latest;
+  console.log(data);
+  const latest = data["dist-tags"]?.latest;
   if (typeof latest !== "string") {
+    return "0";
     throw new Error("Invalid version");
   }
   return latest;

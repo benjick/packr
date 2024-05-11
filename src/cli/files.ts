@@ -5,10 +5,10 @@ export function generateIndexFile(id: string, config: Package) {
   const idFirstUpper = id.charAt(0).toUpperCase() + id.slice(1);
   const content = dedent(`
   import createClient, { ClientOptions } from "openapi-fetch";
-  import type { paths as ${id}Paths } from "./generated";
+  import type { paths as ${idFirstUpper} } from "./generated";
 
   export function create${idFirstUpper}Client(clientOptions?: ClientOptions) {
-    return createClient<${id}Paths>(clientOptions);
+    return createClient<${idFirstUpper}>(clientOptions);
   }`);
   return content;
 }
