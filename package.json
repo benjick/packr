@@ -1,0 +1,27 @@
+{
+  "name": "packr",
+  "version": "1.0.0",
+  "description": "Generated OpenAPI clients for different libraries services",
+  "private": true,
+  "scripts": {
+    "dev": "DRY_RUN=true tsx src/cli/index.ts",
+    "publish": "tsx src/cli/index.ts",
+    "test": "tsx src/test.ts",
+    "test:ts": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "compare-versions": "^6.1.0",
+    "dedent": "^1.5.3",
+    "dotenv": "^16.4.5",
+    "openapi-fetch": "^0.9.5",
+    "openapi-typescript": "^6.7.5",
+    "typescript": "^5.4.5",
+    "yaml": "^2.4.2"
+  },
+  "devDependencies": {
+    "tsx": "^4.9.5"
+  }
+}

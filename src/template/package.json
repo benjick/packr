@@ -1,0 +1,22 @@
+{
+  "name": "changeme",
+  "version": "changeme",
+  "description": "",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "test:ts": "tsc --noEmit",
+    "build": "tsup src/index.ts --format cjs,esm --dts"
+  },
+  "keywords": [],
+  "author": "Max Malm <benjick@dumfan.net>",
+  "license": "MIT",
+  "dependencies": {
+    "openapi-fetch": "^0.9.5"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.5"
+  }
+}
